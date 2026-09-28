@@ -3,6 +3,12 @@ SECTIONS {
 	/* RAM starts at 0x4000_0000 */
 	. = 0x40000000;
 
+	/*
+	 * This is news to me, on AARCH64 the registers are
+	 * 64 bits, but the instructions themselves are 32 bits
+	 * Which really threw me for a loop but wtv.
+	 */
+	. = ALIGN(4);
 	.text : { 
 		*.(.text.boot)
 		*.(.text)
