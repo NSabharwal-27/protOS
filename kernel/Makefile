@@ -11,25 +11,28 @@ RE = $(CROSS_SRC)/$(CROSS)-readelf
 
 ARCHDIR ?= ./arch/aarch64
 
+TARGET := protos.elf
+
 # TODO:
 # Seperate each of the commands for seperate rules too, maybe?
 # This needs to be cleaner, need to figure out how.
-all: protos.c
+all:
 	$(AS) $(ARCHDIR)/boot.s -o boot.o
 	$(CC) -ffreestanding -c protos.c -o protos.o
 	$(CC) -ffreestanding -c ./uart/uart.c -o uart.o
-	$(LD) -nostdlib -T$(ARCHDIR)/linker.ld boot.o uart.o protos.o -o protos.elf
+	$(LD) -nostdlib -T$(ARCHDIR)/linker.ld boot.o uart.o protos.o -o $(TARGET)
 
-clean:
+clean:$(TARGET)
 	rm *.o *.elf
 
-run:
+run:$(TARGET)
 	qemu-system-aarch64 \
 	-machine virt \
 	-cpu cortex-a57 \
 	-nographic \
-	-kernel protos.elf
-sym:
-	$(RE) -s protos.elf
+	-kernel $(TARGET)
+
+sym:$(TARGET)
+	$(RE) -s $(TARGET)
 
 .PHONY: all clean run sym
