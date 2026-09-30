@@ -4,4 +4,6 @@
 void kmain(void) {
 	uart_init();
 	kprintf("Hello World!\n");
+
+	while(1);
 }
