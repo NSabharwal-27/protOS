@@ -52,4 +52,16 @@
 #define OUT_SHARE       (2ULL << 12)
 #define IN_SHARE        (3ULL << 12)
 
+/* Access Perms */
+#define EL0_NA_0        (0ULL)  /* 00 No Access      */
+#define EL0_RW          (1ULL)  /* 01 Read and Write */
+#define EL0_NA_2        (2ULL)  /* 10 No Access      */
+#define EL0_RO          (3ULL)  /* 11 Read Only      */
+
+/* EL1/2/3 are privileged so they interpret the exact same access values differently. */
+#define ELP_RW          EL0_NA_0 /* Read and Write */
+#define ELP_RW          EL0_RW   /* Read and Write */
+#define ELP_RO_2        EL0_NA_2 /* Read Only      */
+#define ELP_RO_3        ELO_RO   /* Read Only      */
+
 #endif /* MMU_H */
