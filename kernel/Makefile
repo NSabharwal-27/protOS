@@ -17,12 +17,12 @@ TARGET := protos.elf
 # Seperate each of the commands for seperate rules too, maybe?
 # This needs to be cleaner, need to figure out how.
 all:
-	$(AS) $(ARCHDIR)/boot.s -o boot.o
+	$(AS) $(ARCHDIR)/boot.S -o boot.o
 	$(CC) -ffreestanding -c protos.c -o protos.o
 	$(CC) -ffreestanding -c ./uart/uart.c -o uart.o
 	$(LD) -nostdlib -T$(ARCHDIR)/linker.ld boot.o uart.o protos.o -o $(TARGET)
 
-clean:$(TARGET)
+clean:
 	rm *.o *.elf
 
 run:$(TARGET)
