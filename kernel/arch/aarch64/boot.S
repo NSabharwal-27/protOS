@@ -1,3 +1,20 @@
+/*
+ * Create a custom section with Allocate (a)
+ * and eXecute (x) perms.
+ * align it to 2^12=4096 bytes. 
+ */
+.section TT_L1, "ax"
+.align 12
+
+/*
+ * fill a 4096 byte block full of 0's
+ * each entry is 8 bytes, so there is a total of:
+ * 4096/8 = 512 entries.
+ */
+.global tt_l1_base
+tt_l1_base:
+	.fill   4096, 8, 0
+
 .section .text.boot
 .global _start
 _start:
@@ -10,6 +27,16 @@ _start:
 
 
 .EL1_INITIALIZE:
+	/*
+	 * Ram defined in the linker script starts at
+	 * 0x0000_0000_4000_0000. So we use TTBR0_EL1.
+	 */
+	ldr     x0, =tt_l1_base
+	msr     TTBR0_EL1, x0
+	msr     TCR_EL1, xzr 
+	ldr     x1, =(0x5 << 32)
+	msr     TCR_EL1, x1
+
 	/* Now, setup the stack. */
 	ldr     x9, =_stack_top
 	mov     sp, x9
