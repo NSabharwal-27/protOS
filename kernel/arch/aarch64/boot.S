@@ -5,9 +5,9 @@ _start:
 	mrs     x0, CurrentEL
 	lsr     x0, x0, #2
 	cmp     x0, #1
-	beq     .EL1_INITIALIZE
+	beq     .el1_setup
 
-.EL1_INITIALIZE:
+.el1_setup:
 	/* Now, setup the stack. */
 	ldr     x9, =_stack_top
 	mov     sp, x9
@@ -21,11 +21,11 @@ _start:
  */
 .bss_clear:
 	cmp     x1, x2
-	bge     .CALL_KMAIN
+	bge     .call_kmain
 	str     xzr, [x1], #8
 	b       .bss_clear
 
-.CALL_KMAIN:
+.call_kmain:
 	/* Now that's done, go to kernel */
 	bl      kmain
 	b       .
