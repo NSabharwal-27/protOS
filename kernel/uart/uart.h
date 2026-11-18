@@ -50,8 +50,6 @@
 
 #define UARTFR_TXFF     (1 << 5)
 
-
-
 #define UART_ACCESS_REG(offset) \
 		(*(volatile uint32_t *)(UART_BASE_ADDR + (offset)))
 
