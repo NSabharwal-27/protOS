@@ -21,9 +21,10 @@ LDFLAGS ?= -T$(ARCHDIR)
 # This needs to be cleaner, need to figure out how.
 all:
 	$(CC) $(CCFLAGS) -c $(ARCHDIR)/boot/boot.S -o boot.o
+	$(CC) $(CCFLAGS) -c $(ARCHDIR)/mmu/mmu.c -o mmu.o
 	$(CC) $(CCFLAGS) -c protos.c -o protos.o
 	$(CC) $(CCFLAGS) -c ./uart/uart.c -o uart.o
-	$(LD) -nostdlib $(LDFLAGS)/boot/linker.ld boot.o uart.o protos.o -o $(TARGET)
+	$(LD) -nostdlib $(LDFLAGS)/boot/linker.ld boot.o uart.o mmu.o protos.o -o $(TARGET)
 
 clean:
 	rm *.o *.elf

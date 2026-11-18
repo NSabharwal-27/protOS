@@ -51,7 +51,7 @@
 #define SH0             (IN_SHARE << 12)
 
 /* TCR Settings assembled to configure the MMU */
-#define TCR_SETTINGS    (T0SZ | IRGN0 | ORGN0 | SH0  | TG0 | IPA_SZ )
+#define TCR_SETTINGS    ( T0SZ | IRGN0 | ORGN0 | SH0 | TG0 | IPA_SZ )
 
 /* MAIR slots */
 #define MAIR_SLOT_0(x)  (x << 0)    /* MAIR_D_nGnRnE */
@@ -70,6 +70,9 @@
 
 /*Setting up MAIR*/
 #define MAIR_SET        (MAIR_SLOT_0(MAIR_D_nGnRnE) | MAIR_SLOT_1(MAIR_D_NORMAL))
+
+#define PAGE_ENTRIES    (512)   /* 512 entries each of uint64_t  = 4096 bytes */
+#define PAGE_SIZE       (4096)  /* Hardware alignment requirement */
 
 void mmu_init(void);
 
