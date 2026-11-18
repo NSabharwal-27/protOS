@@ -54,14 +54,14 @@
 #define TCR_SETTINGS    ( T0SZ | IRGN0 | ORGN0 | SH0 | TG0 | IPA_SZ )
 
 /* MAIR slots */
-#define MAIR_SLOT_0(x)  (x << 0)    /* MAIR_D_nGnRnE */
-#define MAIR_SLOT_1(x)  (x << 8)    /* MAIR_D_NORMAL */
-#define MAIR_SLOT_2(x)  (x << 16)   /* available */
-#define MAIR_SLOT_3(x)  (x << 24)   /* available */
-#define MAIR_SLOT_4(x)  (x << 32)   /* available */
-#define MAIR_SLOT_5(x)  (x << 40)   /* available */
-#define MAIR_SLOT_6(x)  (x << 48)   /* available */
-#define MAIR_SLOT_7(x)  (x << 56)   /* available */
+#define MAIR_SLOT_0(x)  (x << (8 * 0))    /* MAIR_D_nGnRnE */
+#define MAIR_SLOT_1(x)  (x << (8 * 1))    /* MAIR_D_NORMAL */
+#define MAIR_SLOT_2(x)  (x << (8 * 2))   /* available */
+#define MAIR_SLOT_3(x)  (x << (8 * 3))   /* available */
+#define MAIR_SLOT_4(x)  (x << (8 * 4))   /* available */
+#define MAIR_SLOT_5(x)  (x << (8 * 5))   /* available */
+#define MAIR_SLOT_6(x)  (x << (8 * 6))   /* available */
+#define MAIR_SLOT_7(x)  (x << (8 * 7))   /* available */
 
 
 /* Memory Types for MAIR */
