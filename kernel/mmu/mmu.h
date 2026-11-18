@@ -51,7 +51,7 @@
 #define SH0             (IN_SHARE << 12)
 
 /* TCR Settings assembled to configure the MMU */
-#define TCR_SETTINGS    (T0SZ | IRGN | ORGN | SH0  | TG0 | IPA_SZ )
+#define TCR_SETTINGS    (T0SZ | IRGN0 | ORGN0 | SH0  | TG0 | IPA_SZ )
 
 /* MAIR slots */
 #define MAIR_SLOT_0(x)  (x << 0)    /* MAIR_D_nGnRnE */
@@ -65,8 +65,8 @@
 
 
 /* Memory Types for MAIR */
-#define MAIR_D_nGnRnE   (0x00UL) /* slot 1 */
-#define MAIR_D_NORMAL   (0xFFUL) /* slot 2 */
+#define MAIR_D_nGnRnE   (0x00UL) /* slot 0 */
+#define MAIR_D_NORMAL   (0xFFUL) /* slot 1 */
 
 /*Setting up MAIR*/
 #define MAIR_SET        (MAIR_SLOT_0(MAIR_D_nGnRnE) | MAIR_SLOT_1(MAIR_D_NORMAL))
