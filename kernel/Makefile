@@ -9,7 +9,7 @@ AS = $(CROSS_SRC)/$(CROSS)-as
 LD = $(CROSS_SRC)/$(CROSS)-ld
 RE = $(CROSS_SRC)/$(CROSS)-readelf
 
-ARCHDIR ?= ./arch/aarch64
+ARCHDIR ?= ./arm64
 
 TARGET := protos.elf
 
@@ -20,16 +20,16 @@ LDFLAGS ?= -T$(ARCHDIR)
 # Seperate each of the commands for seperate rules too, maybe?
 # This needs to be cleaner, need to figure out how.
 all:
-	$(CC) $(CCFLAGS) -c $(ARCHDIR)/boot.S -o boot.o
+	$(CC) $(CCFLAGS) -c $(ARCHDIR)/boot/boot.S -o boot.o
 	$(CC) $(CCFLAGS) -c protos.c -o protos.o
 	$(CC) $(CCFLAGS) -c ./uart/uart.c -o uart.o
-	$(LD) -nostdlib $(LDFLAGS)/linker.ld boot.o uart.o protos.o -o $(TARGET)
+	$(LD) -nostdlib $(LDFLAGS)/boot/linker.ld boot.o uart.o protos.o -o $(TARGET)
 
 clean:
 	rm *.o *.elf
 
 debug:
-	$(AS) -g $(ARCHDIR)/boot.S -o boot.o
+	$(AS) -g $(ARCHDIR)/boot/boot.S -o boot.o
 	$(CC) $(CCFLAGS) -g -O0 -c protos.c -o protos.o
 	$(CC) $(CCFLAGS) -g -O0 -c ./uart/uart.c -o uart.o
 	$(LD) -nostdlib $(LDFLAGS)/linker.ld boot.o uart.o protos.o -o $(TARGET)
