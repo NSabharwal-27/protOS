@@ -67,11 +67,16 @@
 #define MAIR_D_nGnRnE   (0x00UL) /* slot 0 */
 #define MAIR_D_NORMAL   (0xFFUL) /* slot 1 */
 
-/*Setting up MAIR*/
+/* Setting up MAIR */
 #define MAIR_SET        (MAIR_SLOT_0(MAIR_D_nGnRnE) | MAIR_SLOT_1(MAIR_D_NORMAL))
 
+/* Page Table Flags */
 #define PAGE_ENTRIES    (512)   /* 512 entries each of uint64_t  = 4096 bytes */
 #define PAGE_SIZE       (4096)  /* Hardware alignment requirement */
+
+#define PTE_VALID       (1 << 0)
+#define PTE_TABLE       (1 << 1)
+#define PTE_BLOCK       (0 << 1)
 
 void mmu_init(void);
 
